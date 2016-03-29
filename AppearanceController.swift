@@ -12,7 +12,7 @@ import UIKit
 class AppearanceController {
     
     static func initializeAppearance() {
-        UINavigationBar.appearance().barTintColor = UIColor(red: 1.000, green: 0.353, blue: 0.000, alpha: 1.00)
+        UINavigationBar.appearance().barTintColor = UIColor(red: 0.153, green: 0.863, blue: 0.584, alpha: 1.00)
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
 }

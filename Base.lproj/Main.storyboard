@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
@@ -129,7 +130,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="burger" translatesAutoresizingMaskIntoConstraints="NO" id="klG-OL-BTM">
                                 <rect key="frame" x="347" y="220" width="60" height="57"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="anY-4m-v1f"/>
+                                    <constraint firstAttribute="width" constant="60" id="lPS-RX-sgt"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chinese" translatesAutoresizingMaskIntoConstraints="NO" id="eeS-w5-hhS">
@@ -138,79 +139,56 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tacos" translatesAutoresizingMaskIntoConstraints="NO" id="kfX-9Z-wfr">
                                 <rect key="frame" x="194" y="220" width="60" height="57"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="a72-cN-UN4"/>
-                                    <constraint firstAttribute="height" constant="57" id="waV-DR-yR8"/>
+                                    <constraint firstAttribute="height" constant="57" id="GiK-93-xfS"/>
+                                    <constraint firstAttribute="width" constant="60" id="gIQ-dn-Ic2"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pizza" translatesAutoresizingMaskIntoConstraints="NO" id="NO6-y4-geo">
                                 <rect key="frame" x="270" y="362" width="60" height="57"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="elP-TY-34d">
-                                <rect key="frame" x="0.0" y="470" width="600" height="130"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofx-m4-ccr">
-                                        <rect key="frame" x="0.0" y="48" width="300" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Get Directions">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="getDirectionsButtonTapped:" destination="ug5-Qv-vzm" eventType="touchUpInside" id="DaJ-c5-gFd"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MI2-ws-WNF">
-                                        <rect key="frame" x="300" y="48" width="300" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Call">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="callButtonTapped:" destination="ug5-Qv-vzm" eventType="touchUpInside" id="dk3-Kx-Ftd"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wraps" translatesAutoresizingMaskIntoConstraints="NO" id="3y0-dl-khS">
                                 <rect key="frame" x="270" y="170" width="60" height="57"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="PgZ-oY-XeQ"/>
-                                </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdn-sc-LAi">
+                                <rect key="frame" x="80" y="85" width="440" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="elP-TY-34d" firstAttribute="leading" secondItem="Wbf-ZV-pox" secondAttribute="leading" id="302-iY-U5H"/>
-                            <constraint firstItem="8R0-gm-xce" firstAttribute="top" secondItem="kfX-9Z-wfr" secondAttribute="bottom" constant="32" id="5OP-6k-ZpS"/>
-                            <constraint firstItem="8R0-gm-xce" firstAttribute="bottom" secondItem="eeS-w5-hhS" secondAttribute="bottom" id="7Eq-c8-QWn"/>
-                            <constraint firstItem="klG-OL-BTM" firstAttribute="top" secondItem="2RG-GM-HRg" secondAttribute="bottom" constant="156" id="8CS-WN-bTc"/>
-                            <constraint firstItem="eeS-w5-hhS" firstAttribute="top" secondItem="klG-OL-BTM" secondAttribute="bottom" constant="32" id="8Hc-fn-plv"/>
-                            <constraint firstItem="SSm-ih-JhT" firstAttribute="top" secondItem="8R0-gm-xce" secondAttribute="bottom" constant="234" id="8Th-sc-bAE"/>
-                            <constraint firstItem="u5Y-j5-I7c" firstAttribute="top" secondItem="3y0-dl-khS" secondAttribute="bottom" constant="49" id="Bex-hA-XqB"/>
-                            <constraint firstItem="elP-TY-34d" firstAttribute="top" secondItem="NO6-y4-geo" secondAttribute="bottom" constant="51" id="GPh-KJ-vNk"/>
-                            <constraint firstItem="NO6-y4-geo" firstAttribute="top" secondItem="u5Y-j5-I7c" secondAttribute="bottom" constant="38" id="LYl-x3-mgX"/>
+                            <constraint firstItem="kfX-9Z-wfr" firstAttribute="bottom" secondItem="klG-OL-BTM" secondAttribute="bottom" id="2IO-tT-2Tl"/>
+                            <constraint firstItem="8R0-gm-xce" firstAttribute="top" secondItem="eeS-w5-hhS" secondAttribute="top" id="7PA-TZ-MpN"/>
+                            <constraint firstItem="klG-OL-BTM" firstAttribute="leading" secondItem="eeS-w5-hhS" secondAttribute="leading" id="7ih-y3-0s1"/>
+                            <constraint firstItem="3y0-dl-khS" firstAttribute="leading" secondItem="NO6-y4-geo" secondAttribute="leading" id="8aX-1e-rB5"/>
+                            <constraint firstItem="klG-OL-BTM" firstAttribute="leading" secondItem="u5Y-j5-I7c" secondAttribute="trailing" constant="8" symbolic="YES" id="8cK-iW-vii"/>
+                            <constraint firstItem="u5Y-j5-I7c" firstAttribute="leading" secondItem="kfX-9Z-wfr" secondAttribute="trailing" constant="8" symbolic="YES" id="9UP-ek-l0q"/>
+                            <constraint firstItem="gdn-sc-LAi" firstAttribute="leading" secondItem="Wbf-ZV-pox" secondAttribute="leadingMargin" constant="60" id="Dlg-Tq-3Oc"/>
+                            <constraint firstItem="3y0-dl-khS" firstAttribute="leading" secondItem="kfX-9Z-wfr" secondAttribute="trailing" constant="16" id="DuQ-IR-qkD"/>
                             <constraint firstItem="u5Y-j5-I7c" firstAttribute="top" secondItem="2RG-GM-HRg" secondAttribute="bottom" constant="212" id="MfO-RY-gE2"/>
-                            <constraint firstItem="eeS-w5-hhS" firstAttribute="leading" secondItem="u5Y-j5-I7c" secondAttribute="trailing" constant="8" id="Qny-2y-hol"/>
-                            <constraint firstItem="3y0-dl-khS" firstAttribute="leading" secondItem="NO6-y4-geo" secondAttribute="leading" id="Rma-PJ-34J"/>
-                            <constraint firstItem="klG-OL-BTM" firstAttribute="leading" secondItem="eeS-w5-hhS" secondAttribute="leading" id="Tnx-A1-uuk"/>
-                            <constraint firstItem="u5Y-j5-I7c" firstAttribute="leading" secondItem="8R0-gm-xce" secondAttribute="trailing" constant="8" id="WbE-h3-rKw"/>
-                            <constraint firstItem="kfX-9Z-wfr" firstAttribute="top" secondItem="2RG-GM-HRg" secondAttribute="bottom" constant="156" id="WmW-MG-jQi"/>
-                            <constraint firstItem="kfX-9Z-wfr" firstAttribute="leading" secondItem="8R0-gm-xce" secondAttribute="leading" id="Xml-dQ-7rv"/>
-                            <constraint firstItem="klG-OL-BTM" firstAttribute="trailing" secondItem="eeS-w5-hhS" secondAttribute="trailing" id="XuW-4A-EO8"/>
-                            <constraint firstItem="elP-TY-34d" firstAttribute="bottom" secondItem="SSm-ih-JhT" secondAttribute="top" id="Zzl-cY-wBS"/>
+                            <constraint firstItem="kfX-9Z-wfr" firstAttribute="top" secondItem="klG-OL-BTM" secondAttribute="top" id="NQ3-zg-Q1Q"/>
+                            <constraint firstItem="kfX-9Z-wfr" firstAttribute="top" secondItem="2RG-GM-HRg" secondAttribute="bottom" constant="156" id="QfD-WV-kAr"/>
+                            <constraint firstItem="3y0-dl-khS" firstAttribute="top" secondItem="2RG-GM-HRg" secondAttribute="bottom" constant="106" id="S8N-z8-xlP"/>
+                            <constraint firstItem="8R0-gm-xce" firstAttribute="bottom" secondItem="eeS-w5-hhS" secondAttribute="bottom" id="U3N-EI-P5W"/>
+                            <constraint firstItem="gdn-sc-LAi" firstAttribute="top" secondItem="2RG-GM-HRg" secondAttribute="bottom" constant="21" id="UEd-eg-6Xy"/>
+                            <constraint firstItem="NO6-y4-geo" firstAttribute="centerX" secondItem="u5Y-j5-I7c" secondAttribute="centerX" id="W7m-SY-BOM"/>
+                            <constraint firstItem="gdn-sc-LAi" firstAttribute="centerX" secondItem="3y0-dl-khS" secondAttribute="centerX" id="aB6-2I-FLO"/>
+                            <constraint firstItem="SSm-ih-JhT" firstAttribute="top" secondItem="NO6-y4-geo" secondAttribute="bottom" constant="181" id="ar3-rV-u4B"/>
                             <constraint firstItem="u5Y-j5-I7c" firstAttribute="centerY" secondItem="Wbf-ZV-pox" secondAttribute="centerY" id="b1V-yu-vsS"/>
-                            <constraint firstItem="kfX-9Z-wfr" firstAttribute="trailing" secondItem="8R0-gm-xce" secondAttribute="trailing" id="fJu-dK-WdT"/>
-                            <constraint firstItem="elP-TY-34d" firstAttribute="centerX" secondItem="NO6-y4-geo" secondAttribute="centerX" id="hZu-OS-3sQ"/>
-                            <constraint firstItem="SSm-ih-JhT" firstAttribute="top" secondItem="NO6-y4-geo" secondAttribute="bottom" constant="181" id="iKK-16-mai"/>
-                            <constraint firstItem="8R0-gm-xce" firstAttribute="top" secondItem="eeS-w5-hhS" secondAttribute="top" id="iYP-SV-hYh"/>
-                            <constraint firstItem="3y0-dl-khS" firstAttribute="trailing" secondItem="NO6-y4-geo" secondAttribute="trailing" id="nWG-Ac-S4Y"/>
-                            <constraint firstItem="3y0-dl-khS" firstAttribute="top" secondItem="2RG-GM-HRg" secondAttribute="bottom" constant="106" id="pC3-os-5M9"/>
-                            <constraint firstItem="NO6-y4-geo" firstAttribute="centerX" secondItem="u5Y-j5-I7c" secondAttribute="centerX" id="wFh-qP-EUd"/>
+                            <constraint firstItem="SSm-ih-JhT" firstAttribute="top" secondItem="8R0-gm-xce" secondAttribute="bottom" constant="234" id="bwT-Ns-R7g"/>
+                            <constraint firstItem="3y0-dl-khS" firstAttribute="top" secondItem="gdn-sc-LAi" secondAttribute="bottom" constant="25" id="f2U-k2-Nlz"/>
+                            <constraint firstItem="u5Y-j5-I7c" firstAttribute="leading" secondItem="8R0-gm-xce" secondAttribute="trailing" constant="8" symbolic="YES" id="h3F-hW-85I"/>
+                            <constraint firstItem="klG-OL-BTM" firstAttribute="trailing" secondItem="eeS-w5-hhS" secondAttribute="trailing" id="i7P-Ss-FHk"/>
+                            <constraint firstItem="3y0-dl-khS" firstAttribute="trailing" secondItem="NO6-y4-geo" secondAttribute="trailing" id="lgW-Cs-dT0"/>
+                            <constraint firstItem="NO6-y4-geo" firstAttribute="top" secondItem="u5Y-j5-I7c" secondAttribute="bottom" constant="38" id="pvI-fS-jGK"/>
+                            <constraint firstItem="8R0-gm-xce" firstAttribute="top" secondItem="kfX-9Z-wfr" secondAttribute="bottom" constant="32" id="qOr-ev-TXe"/>
+                            <constraint firstItem="u5Y-j5-I7c" firstAttribute="top" secondItem="3y0-dl-khS" secondAttribute="bottom" constant="49" id="wFV-Jp-aQu"/>
                             <constraint firstItem="u5Y-j5-I7c" firstAttribute="centerX" secondItem="Wbf-ZV-pox" secondAttribute="centerX" id="wdc-7X-r86"/>
+                            <constraint firstItem="kfX-9Z-wfr" firstAttribute="leading" secondItem="8R0-gm-xce" secondAttribute="leading" id="xpJ-uf-Z0A"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="callButton" destination="MI2-ws-WNF" id="2lU-6x-nTe"/>
-                        <outlet property="getDirectionsButton" destination="ofx-m4-ccr" id="BuK-7c-OVU"/>
                         <outlet property="resultsImageFive" destination="kfX-9Z-wfr" id="oGo-TN-6Po"/>
                         <outlet property="resultsImageFour" destination="eeS-w5-hhS" id="91K-k1-nPC"/>
                         <outlet property="resultsImageOne" destination="3y0-dl-khS" id="hTr-gU-e5s"/>
@@ -218,6 +196,7 @@
                         <outlet property="resultsImageThree" destination="klG-OL-BTM" id="SzI-hh-kae"/>
                         <outlet property="resultsImageTwo" destination="8R0-gm-xce" id="dcA-V5-yDB"/>
                         <outlet property="rouletteButton" destination="u5Y-j5-I7c" id="p0g-gz-OmX"/>
+                        <outlet property="winnerLabel" destination="gdn-sc-LAi" id="Y6Y-q8-ndA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T2Y-JB-jKf" userLabel="First Responder" sceneMemberID="firstResponder"/>

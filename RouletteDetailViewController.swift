@@ -19,14 +19,15 @@ class RouletteDetailViewController: UIViewController {
     @IBOutlet weak var resultsImageFive: UIImageView!
     @IBOutlet weak var resultsImageSix: UIImageView!
     
-    @IBOutlet weak var getDirectionsButton: UIButton!
-    @IBOutlet weak var callButton: UIButton!
+    @IBOutlet weak var winnerLabel: UILabel!
+
     
     @IBOutlet weak var rouletteButton: UIButton!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        rouletteView()
 
     }
 
@@ -36,21 +37,17 @@ class RouletteDetailViewController: UIViewController {
     }
     
     @IBAction func rouletteButtonTapped(sender: AnyObject) {
-        randomRestaurantGenerator()
+                rouletteRotation()
+       let restaurant = randomRestaurantGenerator()
+
+        winnerLabel.text = restaurant
     }
     
-    func randomRestaurantGenerator() {
+    func randomRestaurantGenerator() -> String {
         let array = selectedRestaurantsList
         let randomRestaurant = Int(arc4random_uniform(UInt32(array.count)))
         print(array[randomRestaurant])
-    }
-    
-    @IBAction func getDirectionsButtonTapped(sender: AnyObject) {
-        
-    }
-    
-    @IBAction func callButtonTapped(sender: AnyObject) {
-        
+        return array[randomRestaurant] as! String
     }
     
     func switchToOptionsMode() {
@@ -64,8 +61,28 @@ class RouletteDetailViewController: UIViewController {
     }
     
     func rouletteView() {
-        getDirectionsButton.hidden = true
-        callButton.hidden = true
+//        getDirectionsButton.hidden = true
+//        callButton.hidden = true
+    }
+    
+    func rouletteRotation() {
+        let boundingRect = CGRectMake(-220, 0, 200, 200)
+
+        let orbitAnimation = CAKeyframeAnimation()
+                orbitAnimation.keyPath = "position"
+                orbitAnimation.path = CGPathCreateWithEllipseInRect(boundingRect, nil)
+                orbitAnimation.duration = 0.80
+                orbitAnimation.additive = true
+                orbitAnimation.repeatCount = Float.init(4)
+                orbitAnimation.calculationMode = kCAAnimationPaced
+                orbitAnimation.rotationMode = kCAAnimationRotateAuto
+        
+        resultsImageOne.layer.addAnimation(orbitAnimation, forKey: "orbit")
+//        resultsImageTwo.layer.addAnimation
+//        resultsImageThree.layer.addAnimation(orbitAnimation, forKey: "orbit")
+//        resultsImageFour.layer.addAnimation(orbitAnimation, forKey: "orbit")
+//        resultsImageFive.layer.addAnimation(orbitAnimation, forKey: "orbit")
+//        resultsImageSix.layer.addAnimation(orbitAnimation, forKey: "orbit")
     }
     
     
