@@ -28,7 +28,11 @@ class RouletteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         rouletteView()
-
+        
+        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
+        backgroundImage.image = UIImage(named: "table")
+        // Image provided by blazepress.com //
+        self.view.insertSubview(backgroundImage, atIndex: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,9 +41,8 @@ class RouletteDetailViewController: UIViewController {
     }
     
     @IBAction func rouletteButtonTapped(sender: AnyObject) {
-                rouletteRotation()
-       let restaurant = randomRestaurantGenerator()
 
+       let restaurant = randomRestaurantGenerator()
         winnerLabel.text = restaurant
     }
     
@@ -65,25 +68,16 @@ class RouletteDetailViewController: UIViewController {
 //        callButton.hidden = true
     }
     
-    func rouletteRotation() {
-        let boundingRect = CGRectMake(-220, 0, 200, 200)
-
-        let orbitAnimation = CAKeyframeAnimation()
-                orbitAnimation.keyPath = "position"
-                orbitAnimation.path = CGPathCreateWithEllipseInRect(boundingRect, nil)
-                orbitAnimation.duration = 0.80
-                orbitAnimation.additive = true
-                orbitAnimation.repeatCount = Float.init(4)
-                orbitAnimation.calculationMode = kCAAnimationPaced
-                orbitAnimation.rotationMode = kCAAnimationRotateAuto
-        
-        resultsImageOne.layer.addAnimation(orbitAnimation, forKey: "orbit")
-//        resultsImageTwo.layer.addAnimation
-//        resultsImageThree.layer.addAnimation(orbitAnimation, forKey: "orbit")
-//        resultsImageFour.layer.addAnimation(orbitAnimation, forKey: "orbit")
-//        resultsImageFive.layer.addAnimation(orbitAnimation, forKey: "orbit")
-//        resultsImageSix.layer.addAnimation(orbitAnimation, forKey: "orbit")
+    func blurBackImage() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        view.addSubview(blurEffectView)
     }
+
+
+
     
     
 

@@ -51,7 +51,12 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func selectButtonTapped(sender: AnyObject) {
-        performSegueWithIdentifier("selectedIdentifier", sender: nil)
+        if selectedRestaurantsArray.count == 0 {
+            selectRestaurantNotification()
+        } else {
+            performSegueWithIdentifier("selectedIdentifier", sender: nil)
+        }
+        
     }
     
     
@@ -69,6 +74,13 @@ class MapViewController: UIViewController {
             self.localSearchResults = response.mapItems
             self.tableView.reloadData()
         }
+    }
+    
+    func selectRestaurantNotification() {
+        let alertController = UIAlertController(title: "No Restaurant Selected", message: "Select Restaurant To Proceed", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+        alertController.addAction(action)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     
@@ -98,6 +110,8 @@ class MapViewController: UIViewController {
             self.localSearchResults = response.mapItems
             self.tableView.reloadData()
         }
+        
+//        selectRestaurantNotification()
         
     }
 
@@ -137,7 +151,7 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = restaurant.name!
         cell.detailTextLabel?.text = restaurant.phoneNumber
         let bgColorView = UIView()
-        bgColorView.backgroundColor = (UIColor.init(red: 0.792, green: 0.110, blue: 0.212, alpha: 1.00))
+        bgColorView.backgroundColor = (UIColor.init(red: 0.773, green: 0.553, blue: 0.357, alpha: 1.00))
         cell.selectedBackgroundView = bgColorView
         return cell
     }
