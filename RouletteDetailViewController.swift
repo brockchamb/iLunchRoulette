@@ -10,7 +10,7 @@ import UIKit
 
 class RouletteDetailViewController: UIViewController {
     
-    var selectedRestaurantsList = []
+    var selectedRestaurantsList: [String] = []
     
     @IBOutlet weak var resultsImageOne: UIImageView!
     @IBOutlet weak var resultsImageTwo: UIImageView!
@@ -21,9 +21,9 @@ class RouletteDetailViewController: UIViewController {
     
     @IBOutlet weak var winnerLabel: UILabel!
 
+    @IBOutlet weak var getDirectionsButton: UIButton!
     
     @IBOutlet weak var rouletteButton: UIButton!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,16 +41,24 @@ class RouletteDetailViewController: UIViewController {
     }
     
     @IBAction func rouletteButtonTapped(sender: AnyObject) {
-
-       let restaurant = randomRestaurantGenerator()
-        winnerLabel.text = restaurant
+        rouletteWinner = randomRestaurantGenerator()
+        winnerLabel.text = rouletteWinner ?? ""
     }
+    
+    @IBAction func getDirectionsButtonTapped(sender: AnyObject) {
+        performSegueWithIdentifier("directionsSegue", sender: nil)
+        print(rouletteWinner)
+    }
+    
+    var rouletteWinner: String?
+    
+
     
     func randomRestaurantGenerator() -> String {
         let array = selectedRestaurantsList
         let randomRestaurant = Int(arc4random_uniform(UInt32(array.count)))
         print(array[randomRestaurant])
-        return array[randomRestaurant] as! String
+        return array[randomRestaurant]
     }
     
     func switchToOptionsMode() {
@@ -76,19 +84,16 @@ class RouletteDetailViewController: UIViewController {
         view.addSubview(blurEffectView)
     }
 
-
-
-    
-    
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "directionsSegue" {
+            if let destinationViewController = segue.destinationViewController as? DirectionsViewController {
+                destinationViewController.winningRestaurant = rouletteWinner
+            }
+        }
+
     }
-    */
+    
 
 }
