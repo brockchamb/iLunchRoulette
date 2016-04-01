@@ -12,12 +12,8 @@ class RouletteDetailViewController: UIViewController {
     
     var selectedRestaurantsList: [String] = []
     
-    @IBOutlet weak var resultsImageOne: UIImageView!
-    @IBOutlet weak var resultsImageTwo: UIImageView!
-    @IBOutlet weak var resultsImageThree: UIImageView!
-    @IBOutlet weak var resultsImageFour: UIImageView!
-    @IBOutlet weak var resultsImageFive: UIImageView!
-    @IBOutlet weak var resultsImageSix: UIImageView!
+    @IBOutlet weak var rouletteImage: UIImageView!
+
     
     @IBOutlet weak var winnerLabel: UILabel!
 
@@ -41,6 +37,7 @@ class RouletteDetailViewController: UIViewController {
     }
     
     @IBAction func rouletteButtonTapped(sender: AnyObject) {
+        createAnimation()
         rouletteWinner = randomRestaurantGenerator()
         winnerLabel.text = rouletteWinner ?? ""
     }
@@ -63,12 +60,7 @@ class RouletteDetailViewController: UIViewController {
     
     func switchToOptionsMode() {
         rouletteButton.hidden = true
-        resultsImageOne.hidden = true
-        resultsImageTwo.hidden = true
-        resultsImageThree.hidden = true
-        resultsImageFour.hidden = true
-        resultsImageFive.hidden = true
-        resultsImageSix.hidden = true
+
     }
     
     func rouletteView() {
@@ -82,6 +74,24 @@ class RouletteDetailViewController: UIViewController {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         view.addSubview(blurEffectView)
+    }
+    
+    func createAnimation() {
+        
+        let bounds = CGRectMake(0, 0, 1, 1)
+        
+        let rotateAnimation = CAKeyframeAnimation()
+        rotateAnimation.keyPath = "position"
+        rotateAnimation.path = CGPathCreateWithEllipseInRect(bounds, nil)
+        rotateAnimation.duration = 1.0
+        rotateAnimation.additive = true
+        rotateAnimation.repeatCount = Float.init(50)
+        rotateAnimation.rotationMode = kCAAnimationRotateAuto
+        rotateAnimation.speed = 9.0
+        
+        
+        self.rouletteImage.layer.addAnimation(rotateAnimation, forKey: "shake")
+        
     }
 
     // MARK: - Navigation

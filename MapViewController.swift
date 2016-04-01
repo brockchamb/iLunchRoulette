@@ -10,10 +10,9 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController {
+    
     let locationManager = CLLocationManager()
     
-    var resultSearchController: UISearchController? = nil
-    var selectedPin: MKPlacemark? = nil
     var localSearchResults = []
     var selectedDistance = 0.001
     var currentLocation = CLLocation()
@@ -149,7 +148,6 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("restaurantCell", forIndexPath: indexPath)
         let restaurant = self.localSearchResults[indexPath.row] as! MKMapItem
         cell.textLabel?.text = restaurant.name!
-        cell.detailTextLabel?.text = restaurant.phoneNumber
         let bgColorView = UIView()
         bgColorView.backgroundColor = (UIColor.init(red: 0.773, green: 0.553, blue: 0.357, alpha: 1.00))
         cell.selectedBackgroundView = bgColorView
