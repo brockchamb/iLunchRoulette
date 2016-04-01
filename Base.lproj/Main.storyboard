@@ -198,7 +198,7 @@
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2rV-Mm-XZ3">
-                                <rect key="frame" x="352" y="489" width="168" height="43"/>
+                                <rect key="frame" x="412" y="537" width="168" height="43"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="C3g-gm-Bb3"/>
@@ -220,12 +220,6 @@
                                     <action selector="getDirectionsButtonTapped:" destination="ug5-Qv-vzm" eventType="touchUpInside" id="jYI-3d-bk8"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="roulette" translatesAutoresizingMaskIntoConstraints="NO" id="hhF-Tx-faQ">
-                                <rect key="frame" x="144" y="165" width="313" height="270"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="313" id="BnT-VQ-hlu"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u5Y-j5-I7c">
                                 <rect key="frame" x="262" y="276" width="77" height="48"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -248,27 +242,35 @@
                                     <action selector="rouletteButtonTapped:" destination="ug5-Qv-vzm" eventType="touchUpInside" id="skZ-NU-4Pd"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" translatesAutoresizingMaskIntoConstraints="NO" id="GUe-Dc-2sS">
+                                <rect key="frame" x="20" y="115" width="560" height="369"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="369" id="4LQ-T7-Xo3"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SSm-ih-JhT" firstAttribute="top" secondItem="2rV-Mm-XZ3" secondAttribute="bottom" constant="68" id="BZE-VK-A1Z"/>
+                            <constraint firstItem="u5Y-j5-I7c" firstAttribute="centerX" secondItem="gdn-sc-LAi" secondAttribute="centerX" id="1gi-be-K2n"/>
+                            <constraint firstItem="SSm-ih-JhT" firstAttribute="top" secondItem="2rV-Mm-XZ3" secondAttribute="bottom" constant="20" id="BZE-VK-A1Z"/>
                             <constraint firstItem="gdn-sc-LAi" firstAttribute="leading" secondItem="Wbf-ZV-pox" secondAttribute="leadingMargin" id="Dlg-Tq-3Oc"/>
-                            <constraint firstItem="2rV-Mm-XZ3" firstAttribute="top" secondItem="hhF-Tx-faQ" secondAttribute="bottom" constant="54" id="Fwm-fB-1oY"/>
-                            <constraint firstItem="u5Y-j5-I7c" firstAttribute="top" secondItem="2RG-GM-HRg" secondAttribute="bottom" constant="212" id="MfO-RY-gE2"/>
+                            <constraint firstItem="SSm-ih-JhT" firstAttribute="top" secondItem="u5Y-j5-I7c" secondAttribute="bottom" constant="276" id="HZJ-CQ-riH"/>
+                            <constraint firstItem="GUe-Dc-2sS" firstAttribute="trailing" secondItem="gdn-sc-LAi" secondAttribute="trailing" id="Taa-RU-Sem"/>
                             <constraint firstItem="gdn-sc-LAi" firstAttribute="top" secondItem="2RG-GM-HRg" secondAttribute="bottom" constant="21" id="UEd-eg-6Xy"/>
-                            <constraint firstItem="hhF-Tx-faQ" firstAttribute="centerY" secondItem="Wbf-ZV-pox" secondAttribute="centerY" id="Z6e-E7-hDw"/>
-                            <constraint firstItem="u5Y-j5-I7c" firstAttribute="centerY" secondItem="Wbf-ZV-pox" secondAttribute="centerY" id="b1V-yu-vsS"/>
-                            <constraint firstItem="2rV-Mm-XZ3" firstAttribute="trailing" secondItem="gdn-sc-LAi" secondAttribute="trailing" constant="-60" id="gea-fm-hCd"/>
-                            <constraint firstItem="hhF-Tx-faQ" firstAttribute="centerX" secondItem="gdn-sc-LAi" secondAttribute="centerX" id="l5j-gc-uOl"/>
-                            <constraint firstItem="hhF-Tx-faQ" firstAttribute="top" secondItem="gdn-sc-LAi" secondAttribute="bottom" constant="10" id="pId-Za-yMb"/>
-                            <constraint firstItem="u5Y-j5-I7c" firstAttribute="centerX" secondItem="Wbf-ZV-pox" secondAttribute="centerX" id="wdc-7X-r86"/>
-                            <constraint firstItem="hhF-Tx-faQ" firstAttribute="centerX" secondItem="Wbf-ZV-pox" secondAttribute="centerX" id="yuK-jD-Mbi"/>
+                            <constraint firstItem="u5Y-j5-I7c" firstAttribute="centerY" secondItem="GUe-Dc-2sS" secondAttribute="centerY" constant="0.5" id="awJ-oh-ybY"/>
+                            <constraint firstItem="2rV-Mm-XZ3" firstAttribute="trailing" secondItem="gdn-sc-LAi" secondAttribute="trailing" id="gea-fm-hCd"/>
+                            <constraint firstItem="GUe-Dc-2sS" firstAttribute="top" secondItem="gdn-sc-LAi" secondAttribute="bottom" constant="-40" id="gkt-Ge-Kcn"/>
+                            <constraint firstItem="GUe-Dc-2sS" firstAttribute="bottom" secondItem="2rV-Mm-XZ3" secondAttribute="bottom" constant="-96" id="lR1-e3-3ab"/>
+                            <constraint firstItem="GUe-Dc-2sS" firstAttribute="trailing" secondItem="Wbf-ZV-pox" secondAttribute="trailingMargin" id="scc-Pc-Met"/>
+                            <constraint firstItem="GUe-Dc-2sS" firstAttribute="leading" secondItem="gdn-sc-LAi" secondAttribute="leading" id="xqz-ni-hkv"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="getDirectionsButton" destination="2rV-Mm-XZ3" id="nA9-gX-dpc"/>
                         <outlet property="rouletteButton" destination="u5Y-j5-I7c" id="p0g-gz-OmX"/>
-                        <outlet property="rouletteImage" destination="hhF-Tx-faQ" id="FQl-bC-HwC"/>
+                        <outlet property="rouletteImage" destination="GUe-Dc-2sS" id="dHD-5t-HKH"/>
                         <outlet property="winnerLabel" destination="gdn-sc-LAi" id="Y6Y-q8-ndA"/>
                         <segue destination="3ea-rx-joU" kind="show" identifier="directionsSegue" id="SU0-Sc-OCK"/>
                     </connections>
@@ -332,6 +334,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="roulette" width="160" height="160"/>
+        <image name="circle" width="342" height="342"/>
     </resources>
 </document>

@@ -23,6 +23,7 @@ class MapViewController: UIViewController {
         print(meters)
         return meters
     }
+
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
@@ -110,7 +111,6 @@ class MapViewController: UIViewController {
             self.tableView.reloadData()
         }
         
-//        selectRestaurantNotification()
         
     }
 
@@ -177,6 +177,7 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
         selectedRestaurantsArray.removeAtIndex(index!)
         print(selectedRestaurantsArray)
     }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "selectedIdentifier" {

@@ -12,8 +12,8 @@ class RouletteDetailViewController: UIViewController {
     
     var selectedRestaurantsList: [String] = []
     
-    @IBOutlet weak var rouletteImage: UIImageView!
 
+    @IBOutlet weak var rouletteImage: UIImageView!
     
     @IBOutlet weak var winnerLabel: UILabel!
 
