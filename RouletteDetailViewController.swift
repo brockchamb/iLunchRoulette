@@ -12,8 +12,18 @@ class RouletteDetailViewController: UIViewController {
     
     var selectedRestaurantsList: [String] = []
     
-
-    @IBOutlet weak var rouletteImage: UIImageView!
+    @IBOutlet weak var rouletteSpinnerView: UIView!
+    @IBOutlet weak var circleView: UIImageView!
+    @IBOutlet weak var image1: UIImageView!
+    @IBOutlet weak var image2: UIImageView!
+    @IBOutlet weak var image3: UIImageView!
+    @IBOutlet weak var image4: UIImageView!
+    @IBOutlet weak var image5: UIImageView!
+    @IBOutlet weak var image6: UIImageView!
+    @IBOutlet weak var image7: UIImageView!
+    @IBOutlet weak var image8: UIImageView!
+    
+    var rouletteImages: [UIImage] = []
     
     @IBOutlet weak var winnerLabel: UILabel!
 
@@ -23,7 +33,9 @@ class RouletteDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        rouletteView()
+        
+        
+
         
         let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
         backgroundImage.image = UIImage(named: "table")
@@ -49,23 +61,11 @@ class RouletteDetailViewController: UIViewController {
     
     var rouletteWinner: String?
     
-
-    
     func randomRestaurantGenerator() -> String {
         let array = selectedRestaurantsList
         let randomRestaurant = Int(arc4random_uniform(UInt32(array.count)))
         print(array[randomRestaurant])
         return array[randomRestaurant]
-    }
-    
-    func switchToOptionsMode() {
-        rouletteButton.hidden = true
-
-    }
-    
-    func rouletteView() {
-//        getDirectionsButton.hidden = true
-//        callButton.hidden = true
     }
     
     func blurBackImage() {
@@ -90,7 +90,7 @@ class RouletteDetailViewController: UIViewController {
         rotateAnimation.speed = 9.0
         
         
-        self.rouletteImage.layer.addAnimation(rotateAnimation, forKey: "shake")
+        self.rouletteSpinnerView.layer.addAnimation(rotateAnimation, forKey: "shake")
         
     }
 
@@ -107,3 +107,10 @@ class RouletteDetailViewController: UIViewController {
     
 
 }
+
+
+
+
+
+
+
