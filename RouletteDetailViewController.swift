@@ -48,8 +48,10 @@ class RouletteDetailViewController: UIViewController {
     
     @IBAction func rouletteButtonTapped(sender: AnyObject) {
         createAnimation()
+        fadeOut() // To make the UIView fade out
         rouletteWinner = randomRestaurantGenerator()
         winnerLabel.text = rouletteWinner ?? ""
+        rouletteButton.hidden = true
     }
     
     @IBAction func getDirectionsButtonTapped(sender: AnyObject) {
@@ -66,14 +68,6 @@ class RouletteDetailViewController: UIViewController {
         return array[randomRestaurant]
     }
     
-    func blurBackImage() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        view.addSubview(blurEffectView)
-    }
-    
     func createAnimation() {
         
         let bounds = CGRectMake(0, 0, 1, 1)
@@ -83,13 +77,20 @@ class RouletteDetailViewController: UIViewController {
         rotateAnimation.path = CGPathCreateWithEllipseInRect(bounds, nil)
         rotateAnimation.duration = 1.0
         rotateAnimation.additive = true
-        rotateAnimation.repeatCount = Float.init(50)
+        rotateAnimation.repeatCount = Float.init(35)
         rotateAnimation.rotationMode = kCAAnimationRotateAuto
         rotateAnimation.speed = 7.0
         
         
         self.rouletteSpinnerView.layer.addAnimation(rotateAnimation, forKey: "shake")
         
+    }
+    
+    // Function to make the UIView fade out
+    func fadeOut(duration duration: NSTimeInterval = 5.0) {
+        UIView.animateWithDuration(duration, animations: {
+            self.rouletteSpinnerView.alpha = 0.0
+        })
     }
 
     // MARK: - Navigation

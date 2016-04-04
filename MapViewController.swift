@@ -18,6 +18,8 @@ class MapViewController: UIViewController {
     var currentLocation = CLLocation()
     var selectedRestaurantsArray: [String] = []
     
+    var placeMark: MKPlacemark? = nil
+    
     func convertMilesIntoMeters(miles: Double) -> Double {
         let meters = miles / 0.00062137
         print(meters)
