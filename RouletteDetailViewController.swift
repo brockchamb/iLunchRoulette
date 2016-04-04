@@ -23,8 +23,6 @@ class RouletteDetailViewController: UIViewController {
     @IBOutlet weak var image7: UIImageView!
     @IBOutlet weak var image8: UIImageView!
     
-    var rouletteImages: [UIImage] = []
-    
     @IBOutlet weak var winnerLabel: UILabel!
 
     @IBOutlet weak var getDirectionsButton: UIButton!
@@ -87,7 +85,7 @@ class RouletteDetailViewController: UIViewController {
         rotateAnimation.additive = true
         rotateAnimation.repeatCount = Float.init(50)
         rotateAnimation.rotationMode = kCAAnimationRotateAuto
-        rotateAnimation.speed = 9.0
+        rotateAnimation.speed = 7.0
         
         
         self.rouletteSpinnerView.layer.addAnimation(rotateAnimation, forKey: "shake")
