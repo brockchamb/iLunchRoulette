@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
 class GettingStartedViewController: UIViewController {
     
     @IBOutlet weak var iLunchRouletteLabel: UILabel!
     
     @IBOutlet weak var getStartedButton: UIButton!
+    
+    var locationManager = CLLocationManager()
+    var currentLocation = CLLocation()
+    var localSearchResults = []
+    var selectedDistance = 0.001
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +28,16 @@ class GettingStartedViewController: UIViewController {
         backgroundImage.image = UIImage(named: "foodImage")
         // Image provided by Kely Brisson via flickr //
         self.view.insertSubview(backgroundImage, atIndex: 0)
-    }
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        
+        updateSearchResults()
+    
+}
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -29,19 +45,47 @@ class GettingStartedViewController: UIViewController {
     }
     
     @IBAction func getStartedButtonTapped(sender: AnyObject) {
+        performSegueWithIdentifier("getStarted", sender: nil)
+    }
+    
+    func updateSearchResults() {
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = "Restaurants"
         
+        let search = MKLocalSearch(request: request)
+        search.startWithCompletionHandler { (response, error) in
+            guard let response = response else {
+                print("Error \(error)")
+                return
+            }
+            self.localSearchResults = response.mapItems
+        }
     }
     
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "getStarted" {
+            if let destinationViewController = segue.destinationViewController as? MapViewController {
+                destinationViewController.currentLocation = currentLocation
+            }
+            
+        }
     }
-    */
 
+}
+
+extension GettingStartedViewController: CLLocationManagerDelegate {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .AuthorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            self.currentLocation = location
+        }
+    }
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("error: \(error)")
+    }
 }

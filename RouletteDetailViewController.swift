@@ -32,13 +32,11 @@ class RouletteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-
-        
         let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
         backgroundImage.image = UIImage(named: "table")
         // Image provided by blazepress.com //
         self.view.insertSubview(backgroundImage, atIndex: 0)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +47,7 @@ class RouletteDetailViewController: UIViewController {
     @IBAction func rouletteButtonTapped(sender: AnyObject) {
         createAnimation()
         fadeOut() // To make the UIView fade out
+        scaleDown()
         rouletteWinner = randomRestaurantGenerator()
         winnerLabel.text = rouletteWinner ?? ""
         rouletteButton.hidden = true
@@ -92,7 +91,17 @@ class RouletteDetailViewController: UIViewController {
             self.rouletteSpinnerView.alpha = 0.0
         })
     }
-
+    // Attempting to scale down the roulette view
+    func scaleDown() {
+        UIView.animateWithDuration(5.0, animations: {
+            self.rouletteSpinnerView.transform = CGAffineTransformMakeScale(0.1, 0.1) },
+                                   completion: { finish in
+                                    UIView.animateWithDuration(5.0) {
+                                        self.rouletteSpinnerView.transform = CGAffineTransformIdentity
+                                    }
+        })
+    }
+    
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

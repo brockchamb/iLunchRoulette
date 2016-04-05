@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class MapViewController: UIViewController {
     
@@ -25,7 +26,6 @@ class MapViewController: UIViewController {
         print(meters)
         return meters
     }
-
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
@@ -52,6 +52,8 @@ class MapViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     @IBAction func selectButtonTapped(sender: AnyObject) {
         if selectedRestaurantsArray.count == 0 {
             selectRestaurantNotification()
@@ -60,7 +62,6 @@ class MapViewController: UIViewController {
         }
         
     }
-    
     
     func updateSearchResults() {
         let request = MKLocalSearchRequest()
@@ -84,12 +85,11 @@ class MapViewController: UIViewController {
         alertController.addAction(action)
         presentViewController(alertController, animated: true, completion: nil)
     }
-    
-    
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         self.tableView.allowsMultipleSelection = true
         
@@ -98,51 +98,19 @@ class MapViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = "Restaurants"
-        request.region = mapView.region
+        updateSearchResults()
         
-        let search = MKLocalSearch(request: request)
-        search.startWithCompletionHandler { (response, error) in
-            guard let response  = response else {
-                print("Search error \(error)")
-                return
-            }
-            
-            self.localSearchResults = response.mapItems
-            self.tableView.reloadData()
-        }
-        
-        
+        segmentedControl.selectedSegmentIndex == 0
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-
 
 }
 
-extension MapViewController: CLLocationManagerDelegate {
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .AuthorizedWhenInUse {
-            locationManager.requestLocation()
-        }
-    }
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            self.currentLocation = location
-            let span = MKCoordinateSpanMake(0.001, 0.001)
-            let region = MKCoordinateRegionMake(location.coordinate, span)
-            mapView.setRegion(region, animated: true)
-        }
-    }
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("error: \(error)")
-    }
-}
+    //Mark: - TableView Delegates
 
 extension MapViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -190,5 +158,26 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+}
+
+    //Mark: - Location Delegate
+
+extension MapViewController: CLLocationManagerDelegate {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .AuthorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            self.currentLocation = location
+            let span = MKCoordinateSpanMake(selectedDistance, selectedDistance)
+            let region = MKCoordinateRegionMake(location.coordinate, span)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("error: \(error)")
+    }
 }
 

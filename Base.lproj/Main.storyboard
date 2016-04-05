@@ -57,7 +57,6 @@
                                 </state>
                                 <connections>
                                     <action selector="getStartedButtonTapped:" destination="1ub-f1-fcx" eventType="touchUpInside" id="2jF-qO-xoK"/>
-                                    <segue destination="4Q6-vV-v3W" kind="show" id="kme-Kj-Vup"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -74,6 +73,7 @@
                     <connections>
                         <outlet property="getStartedButton" destination="duM-eM-ckj" id="Dxt-93-zwu"/>
                         <outlet property="iLunchRouletteLabel" destination="QBN-vl-Jh5" id="UuH-0g-yIF"/>
+                        <segue destination="4Q6-vV-v3W" kind="show" identifier="getStarted" id="I9r-7s-5gF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vZw-vk-R2a" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -161,6 +161,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="7BF-yU-nTc" id="5L4-FA-1Ka"/>
+                        <outlet property="segmentedControl" destination="p9O-gv-N5Q" id="N0N-6u-Pqg"/>
                         <outlet property="selectButton" destination="hIT-Ja-li2" id="Wew-hx-hhp"/>
                         <outlet property="tableView" destination="qk2-H6-tGL" id="Y3o-iI-AMP"/>
                         <segue destination="ug5-Qv-vzm" kind="show" identifier="selectedIdentifier" id="vU5-os-u3X"/>
