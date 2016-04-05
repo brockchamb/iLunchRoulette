@@ -23,6 +23,9 @@ class RouletteDetailViewController: UIViewController {
     @IBOutlet weak var image7: UIImageView!
     @IBOutlet weak var image8: UIImageView!
     
+    
+    @IBOutlet weak var animatedWinnerLabel: UILabel!
+    
     @IBOutlet weak var winnerLabel: UILabel!
 
     @IBOutlet weak var getDirectionsButton: UIButton!
@@ -37,6 +40,7 @@ class RouletteDetailViewController: UIViewController {
         // Image provided by blazepress.com //
         self.view.insertSubview(backgroundImage, atIndex: 0)
         
+        animatedWinnerLabel.hidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,8 +53,10 @@ class RouletteDetailViewController: UIViewController {
         fadeOut() // To make the UIView fade out
         scaleDown()
         rouletteWinner = randomRestaurantGenerator()
-        winnerLabel.text = rouletteWinner ?? ""
+        animatedWinnerLabel.text = rouletteWinner ?? ""
         rouletteButton.hidden = true
+        animatedWinnerLabel.hidden = false
+        scaleUp()
     }
     
     @IBAction func getDirectionsButtonTapped(sender: AnyObject) {
@@ -98,6 +104,16 @@ class RouletteDetailViewController: UIViewController {
                                    completion: { finish in
                                     UIView.animateWithDuration(5.0) {
                                         self.rouletteSpinnerView.transform = CGAffineTransformIdentity
+                                    }
+        })
+    }
+    
+    func scaleUp() {
+        UIView.animateWithDuration(2.0, animations: {
+            self.animatedWinnerLabel.transform = CGAffineTransformMakeScale(2.0, 0.0) },
+                                   completion: { finish in
+                                    UIView.animateWithDuration(2.0) {
+                                        self.animatedWinnerLabel.transform = CGAffineTransformIdentity
                                     }
         })
     }

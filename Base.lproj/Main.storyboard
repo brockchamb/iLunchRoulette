@@ -340,14 +340,36 @@
                                     <action selector="rouletteButtonTapped:" destination="ug5-Qv-vzm" eventType="touchUpInside" id="aY7-1C-aE5"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UdC-DU-yhx">
+                                <rect key="frame" x="20" y="278" width="560" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="560" id="ZPf-QQ-uSZ"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Label">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="20" name="Papyrus"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nl2-Q4-GNx" firstAttribute="centerY" secondItem="Wbf-ZV-pox" secondAttribute="centerY" id="34e-vq-05V"/>
+                            <constraint firstItem="SSm-ih-JhT" firstAttribute="top" secondItem="UdC-DU-yhx" secondAttribute="bottom" constant="272" id="4CW-O4-cf7"/>
+                            <constraint firstItem="UdC-DU-yhx" firstAttribute="centerY" secondItem="D1Z-YI-OOA" secondAttribute="centerY" constant="2.5" id="5Di-YL-SMS"/>
                             <constraint firstItem="gdn-sc-LAi" firstAttribute="trailing" secondItem="Wbf-ZV-pox" secondAttribute="trailingMargin" id="C3K-ce-wMl"/>
                             <constraint firstItem="gdn-sc-LAi" firstAttribute="leading" secondItem="Wbf-ZV-pox" secondAttribute="leadingMargin" id="G21-VB-G1J"/>
                             <constraint firstItem="D1Z-YI-OOA" firstAttribute="centerX" secondItem="Wbf-ZV-pox" secondAttribute="centerX" id="Ng1-Ro-qa6"/>
                             <constraint firstItem="gdn-sc-LAi" firstAttribute="top" secondItem="2RG-GM-HRg" secondAttribute="bottom" constant="21" id="Uj4-e3-URF"/>
+                            <constraint firstItem="UdC-DU-yhx" firstAttribute="centerX" secondItem="gdn-sc-LAi" secondAttribute="centerX" id="gUF-hw-EaP"/>
                             <constraint firstAttribute="bottom" secondItem="2rV-Mm-XZ3" secondAttribute="bottom" constant="20" symbolic="YES" id="jhK-uT-pnh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2rV-Mm-XZ3" secondAttribute="trailing" id="nIR-W6-Vkf"/>
                             <constraint firstItem="nl2-Q4-GNx" firstAttribute="centerX" secondItem="Wbf-ZV-pox" secondAttribute="centerX" id="zEU-Ua-REo"/>
@@ -355,6 +377,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="animatedWinnerLabel" destination="UdC-DU-yhx" id="yZr-PJ-tFT"/>
                         <outlet property="circleView" destination="lSA-wS-XKS" id="i50-eA-o5c"/>
                         <outlet property="getDirectionsButton" destination="2rV-Mm-XZ3" id="nA9-gX-dpc"/>
                         <outlet property="image1" destination="74R-Tw-TzZ" id="8zW-nD-lFE"/>
