@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class RouletteDetailViewController: UIViewController {
     
@@ -116,6 +117,13 @@ class RouletteDetailViewController: UIViewController {
                                         self.animatedWinnerLabel.transform = CGAffineTransformIdentity
                                     }
         })
+    }
+    
+    func getDirections(mapView: MKMapView) {
+//        let mapItem = MKMapItem()
+//        let location = rouletteWinner as! MKMapItem
+//        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
+//        location.mapItem()
     }
     
     // MARK: - Navigation

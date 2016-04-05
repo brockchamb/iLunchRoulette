@@ -97,11 +97,10 @@ class MapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-        
-        updateSearchResults()
-        
-        segmentedControl.selectedSegmentIndex == 0
-        self.tableView.reloadData()
+//        
+//        updateSearchResults()
+//        
+//        segmentedControl.selectedSegmentIndex == 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -174,6 +173,7 @@ extension MapViewController: CLLocationManagerDelegate {
             let span = MKCoordinateSpanMake(selectedDistance, selectedDistance)
             let region = MKCoordinateRegionMake(location.coordinate, span)
             mapView.setRegion(region, animated: true)
+            updateSearchResults()
         }
     }
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
