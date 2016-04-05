@@ -110,7 +110,7 @@ class RouletteDetailViewController: UIViewController {
     
     func scaleUp() {
         UIView.animateWithDuration(2.0, animations: {
-            self.animatedWinnerLabel.transform = CGAffineTransformMakeScale(2.0, 0.0) },
+            self.animatedWinnerLabel.transform = CGAffineTransformMakeScale(0.0, 2.0) },
                                    completion: { finish in
                                     UIView.animateWithDuration(2.0) {
                                         self.animatedWinnerLabel.transform = CGAffineTransformIdentity
