@@ -14,12 +14,10 @@ class MapViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     
-    var localSearchResults = []
+    var localSearchResults: [MKMapItem] = []
     var selectedDistance = 0.001
     var currentLocation = CLLocation()
-    var selectedRestaurantsArray: [String] = []
-    
-    var placeMark: MKPlacemark? = nil
+    var selectedRestaurantsArray: [MKMapItem] = []
     
     func convertMilesIntoMeters(miles: Double) -> Double {
         let meters = miles / 0.00062137
@@ -97,10 +95,7 @@ class MapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-//        
-//        updateSearchResults()
-//        
-//        segmentedControl.selectedSegmentIndex == 0
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,7 +110,7 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("restaurantCell", forIndexPath: indexPath)
-        let restaurant = self.localSearchResults[indexPath.row] as! MKMapItem
+        let restaurant = self.localSearchResults[indexPath.row] 
         cell.textLabel?.text = restaurant.name!
         let bgColorView = UIView()
         bgColorView.backgroundColor = (UIColor.init(red: 0.773, green: 0.553, blue: 0.357, alpha: 1.00))
@@ -131,18 +126,19 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
         print(indexPath.row)
         print(selectedRestaurantsArray.count)
-        let mapItem = localSearchResults[indexPath.row] as! MKMapItem
-        selectedRestaurantsArray.append(mapItem.name!)
+        let mapItem = localSearchResults[indexPath.row]
+        selectedRestaurantsArray.append(mapItem)
         print(selectedRestaurantsArray)
         
         
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
         print(indexPath.row)
         print(selectedRestaurantsArray.count)
-        let index = selectedRestaurantsArray.indexOf(localSearchResults[indexPath.row].name!)
+        let index = selectedRestaurantsArray.indexOf(localSearchResults[indexPath.row])
         selectedRestaurantsArray.removeAtIndex(index!)
         print(selectedRestaurantsArray)
     }

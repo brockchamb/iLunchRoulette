@@ -11,7 +11,7 @@ import MapKit
 
 class RouletteDetailViewController: UIViewController {
     
-    var selectedRestaurantsList: [String] = []
+    var selectedRestaurantsList: [MKMapItem] = []
     
     @IBOutlet weak var rouletteSpinnerView: UIView!
     @IBOutlet weak var circleView: UIImageView!
@@ -54,20 +54,20 @@ class RouletteDetailViewController: UIViewController {
         fadeOut() // To make the UIView fade out
         scaleDown()
         rouletteWinner = randomRestaurantGenerator()
-        animatedWinnerLabel.text = rouletteWinner ?? ""
+        animatedWinnerLabel.text = rouletteWinner?.name ?? ""
         rouletteButton.hidden = true
         animatedWinnerLabel.hidden = false
         scaleUp()
     }
     
     @IBAction func getDirectionsButtonTapped(sender: AnyObject) {
-        performSegueWithIdentifier("directionsSegue", sender: nil)
+        getDirections()
         print(rouletteWinner)
     }
     
-    var rouletteWinner: String?
+    var rouletteWinner: MKMapItem?
     
-    func randomRestaurantGenerator() -> String {
+    func randomRestaurantGenerator() -> MKMapItem {
         let array = selectedRestaurantsList
         let randomRestaurant = Int(arc4random_uniform(UInt32(array.count)))
         print(array[randomRestaurant])
@@ -119,22 +119,18 @@ class RouletteDetailViewController: UIViewController {
         })
     }
     
-    func getDirections(mapView: MKMapView) {
-//        let mapItem = MKMapItem()
-//        let location = rouletteWinner as! MKMapItem
-//        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
-//        location.mapItem()
+    func getDirections() {
+        
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking]
+        rouletteWinner?.openInMapsWithLaunchOptions(launchOptions)
+        
     }
     
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "directionsSegue" {
-            if let destinationViewController = segue.destinationViewController as? DirectionsViewController {
-                destinationViewController.winningRestaurant = rouletteWinner
-            }
-        }
-
+    
+        
     }
     
 
