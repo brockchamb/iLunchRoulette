@@ -28,6 +28,8 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectButton: UIBarButtonItem!
+    @IBOutlet weak var loadingDataIndicator: UIActivityIndicatorView!
+    
     
     @IBAction func distanceSegmentedController(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
@@ -53,7 +55,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBAction func selectButtonTapped(sender: AnyObject) {
-        if selectedRestaurantsArray.count == 0 {
+        if selectedRestaurantsArray.count <= 1 {
             selectRestaurantNotification()
         } else {
             performSegueWithIdentifier("selectedIdentifier", sender: nil)
@@ -73,6 +75,8 @@ class MapViewController: UIViewController {
                 return
             }
             self.localSearchResults = response.mapItems
+            self.loadingDataIndicator.stopAnimating()
+            self.loadingDataIndicator.hidesWhenStopped = true
             self.tableView.reloadData()
         }
     }
@@ -83,18 +87,33 @@ class MapViewController: UIViewController {
         alertController.addAction(action)
         presentViewController(alertController, animated: true, completion: nil)
     }
+    
+//    var refreshControl =  UIRefreshControl()
+//    
+//    func refresh() {
+//        self.updateSearchResults()
+//        self.tableView.reloadData()
+//        self.refreshControl.endRefreshing()
+//        
+//    }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        loadingDataIndicator.startAnimating()
+
         self.tableView.allowsMultipleSelection = true
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
+        
+//        self.refreshControl = UIRefreshControl()
+//        self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+//        self.tableView.addSubview(self.refreshControl)
+
 
     }
 
@@ -103,6 +122,7 @@ class MapViewController: UIViewController {
     }
 
 }
+
 
     //Mark: - TableView Delegates
 
@@ -113,7 +133,7 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
         let restaurant = self.localSearchResults[indexPath.row] 
         cell.textLabel?.text = restaurant.name!
         let bgColorView = UIView()
-        bgColorView.backgroundColor = (UIColor.init(red: 0.773, green: 0.553, blue: 0.357, alpha: 1.00))
+        bgColorView.backgroundColor = (UIColor.init(red: 0.149, green: 0.349, blue: 0.502, alpha: 1.00))
         cell.selectedBackgroundView = bgColorView
         return cell
     }
@@ -141,6 +161,20 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
         let index = selectedRestaurantsArray.indexOf(localSearchResults[indexPath.row])
         selectedRestaurantsArray.removeAtIndex(index!)
         print(selectedRestaurantsArray)
+    }
+    
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if let selectedRow = tableView.indexPathsForSelectedRows {
+            if selectedRow.count == 8 {
+                let alertController = UIAlertController(title: "Oops!", message: "Selected more than 8 places", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: {action in}))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                return nil
+            }
+        }
+        
+        return indexPath
     }
     
     

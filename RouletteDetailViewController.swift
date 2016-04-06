@@ -43,10 +43,23 @@ class RouletteDetailViewController: UIViewController {
         
         animatedWinnerLabel.hidden = true
     }
+    
+    var restaurantImageArray: [UIImageView] = []
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
+    }
+    
+    func setupImageViews() {
+        for index in 0..<selectedRestaurantsList.count {
+            restaurantImageArray[index].hidden = false
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        restaurantImageArray = [image1, image2, image3, image4, image5, image6, image7, image8]
+        setupImageViews()
     }
     
     @IBAction func rouletteButtonTapped(sender: AnyObject) {
