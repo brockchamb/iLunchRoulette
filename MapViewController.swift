@@ -209,7 +209,7 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             self.currentLocation = location
-            let span = MKCoordinateSpanMake(selectedDistance, selectedDistance)
+            let span = MKCoordinateSpanMake(0.0073, 0.0073)
             let region = MKCoordinateRegionMake(location.coordinate, span)
             mapView.setRegion(region, animated: true)
             updateSearchResults()
