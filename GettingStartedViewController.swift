@@ -22,20 +22,8 @@ class GettingStartedViewController: UIViewController {
         super.viewDidLoad()
         
         refresh()
-//        
-//        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
-//        backgroundImage.image = UIImage(named: "foodImage")
-//        // Image provided by Kely Brisson via flickr //
-//        self.view.insertSubview(backgroundImage, atIndex: 0)
-
-    
 }
 
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func getStartedButtonTapped(sender: AnyObject) {
 
