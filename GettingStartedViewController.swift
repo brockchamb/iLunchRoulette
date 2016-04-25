@@ -15,14 +15,18 @@ class GettingStartedViewController: UIViewController {
     @IBOutlet weak var iLunchRouletteLabel: UILabel!
     
     @IBOutlet weak var getStartedButton: UIButton!
+    
+    let colors = Color()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
-        backgroundImage.image = UIImage(named: "foodImage")
-        // Image provided by Kely Brisson via flickr //
-        self.view.insertSubview(backgroundImage, atIndex: 0)
+        refresh()
+//        
+//        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
+//        backgroundImage.image = UIImage(named: "foodImage")
+//        // Image provided by Kely Brisson via flickr //
+//        self.view.insertSubview(backgroundImage, atIndex: 0)
 
     
 }
@@ -35,6 +39,13 @@ class GettingStartedViewController: UIViewController {
     
     @IBAction func getStartedButtonTapped(sender: AnyObject) {
 
+    }
+    
+    func refresh() {
+        view.backgroundColor = UIColor.clearColor()
+        let backgroundLayer = colors.gl
+        backgroundLayer.frame = view.frame
+        view.layer.insertSublayer(backgroundLayer, atIndex: 0)
     }
 
 }

@@ -13,6 +13,8 @@ class RouletteDetailViewController: UIViewController {
     
     var selectedRestaurantsList: [MKMapItem] = []
     
+    var colors = Color()
+    
     @IBOutlet weak var rouletteSpinnerView: UIView!
     @IBOutlet weak var circleView: UIImageView!
     @IBOutlet weak var image1: UIImageView!
@@ -36,10 +38,12 @@ class RouletteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
-        backgroundImage.image = UIImage(named: "table")
-        // Image provided by blazepress.com //
-        self.view.insertSubview(backgroundImage, atIndex: 0)
+        refresh()
+        
+//        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
+//        backgroundImage.image = UIImage(named: "table")
+//        // Image provided by blazepress.com //
+//        self.view.insertSubview(backgroundImage, atIndex: 0)
         
         animatedWinnerLabel.hidden = true
     }
@@ -51,8 +55,16 @@ class RouletteDetailViewController: UIViewController {
 
     }
     
+    func refresh() {
+        view.backgroundColor = UIColor.clearColor()
+        let backgroundLayer = colors.gl
+        backgroundLayer.frame = view.frame
+        view.layer.insertSublayer(backgroundLayer, atIndex: 0)
+    }
+    
     func setupImageViews() {
         for index in 0..<selectedRestaurantsList.count {
+            restaurantImageArray.appendContentsOf(restaurantImageArray)
             restaurantImageArray[index].hidden = false
         }
     }
@@ -136,13 +148,6 @@ class RouletteDetailViewController: UIViewController {
         
         let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking]
         rouletteWinner?.openInMapsWithLaunchOptions(launchOptions)
-        
-    }
-    
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
         
     }
     

@@ -12,12 +12,35 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     
+    var annotationView: MKPinAnnotationView!
+    var pointAnnotation: CustomPointAnnotation!
+    
     let locationManager = CLLocationManager()
     
     var localSearchResults: [MKMapItem] = []
     var selectedDistance = 0.001
     var currentLocation = CLLocation()
     var selectedRestaurantsArray: [MKMapItem] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loadingDataIndicator.startAnimating()
+        
+        self.tableView.allowsMultipleSelection = true
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        
+        //        self.refreshControl = UIRefreshControl()
+        //        self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        //        self.tableView.addSubview(self.refreshControl)
+        
+        
+    }
+    
     
     func convertMilesIntoMeters(miles: Double) -> Double {
         let meters = miles / 0.00062137
@@ -36,18 +59,27 @@ class MapViewController: UIViewController {
             selectedDistance = convertMilesIntoMeters(1)
             let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), selectedDistance / 2, selectedDistance / 2)
             mapView.region = region
+            
+            localSearchResults.appendContentsOf(selectedRestaurantsArray)
+            
             updateSearchResults()
             
         } else if sender.selectedSegmentIndex == 1 {
             selectedDistance = convertMilesIntoMeters(2)
             let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), selectedDistance / 2, selectedDistance / 2)
             mapView.region = region
+            
+            localSearchResults.appendContentsOf(selectedRestaurantsArray)
+            
             updateSearchResults()
             
         } else if sender.selectedSegmentIndex == 2 {
             selectedDistance = convertMilesIntoMeters(5)
             let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), selectedDistance / 2, selectedDistance / 2)
             mapView.region = region
+            
+            localSearchResults.appendContentsOf(selectedRestaurantsArray)
+            
             updateSearchResults()
         }
     }
@@ -74,6 +106,7 @@ class MapViewController: UIViewController {
                 print("Error \(error)")
                 return
             }
+            
             self.localSearchResults = response.mapItems
             self.loadingDataIndicator.stopAnimating()
             self.loadingDataIndicator.hidesWhenStopped = true
@@ -82,7 +115,7 @@ class MapViewController: UIViewController {
     }
     
     func selectRestaurantNotification() {
-        let alertController = UIAlertController(title: "No Restaurant Selected", message: "Select Restaurant To Proceed", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "No Restaurant Selected", message: "Select Restaurants To Proceed", preferredStyle: .Alert)
         let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
         alertController.addAction(action)
         presentViewController(alertController, animated: true, completion: nil)
@@ -98,29 +131,6 @@ class MapViewController: UIViewController {
 //    }
 
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        loadingDataIndicator.startAnimating()
-
-        self.tableView.allowsMultipleSelection = true
-        
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
-        
-//        self.refreshControl = UIRefreshControl()
-//        self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
-//        self.tableView.addSubview(self.refreshControl)
-
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
 }
 
 
@@ -132,9 +142,7 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("restaurantCell", forIndexPath: indexPath)
         let restaurant = self.localSearchResults[indexPath.row] 
         cell.textLabel?.text = restaurant.name!
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = (UIColor.init(red: 0.149, green: 0.349, blue: 0.502, alpha: 1.00))
-        cell.selectedBackgroundView = bgColorView
+        
         return cell
     }
     
@@ -166,9 +174,9 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         if let selectedRow = tableView.indexPathsForSelectedRows {
             if selectedRow.count == 8 {
-                let alertController = UIAlertController(title: "Oops!", message: "Selected more than 8 places", preferredStyle: .Alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: {action in}))
-                self.presentViewController(alertController, animated: true, completion: nil)
+//                let alertController = UIAlertController(title: "Oops!", message: "Selected more than 8 places", preferredStyle: .Alert)
+//                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: {action in}))
+//                self.presentViewController(alertController, animated: true, completion: nil)
                 
                 return nil
             }
@@ -192,6 +200,7 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
     //Mark: - Location Delegate
 
 extension MapViewController: CLLocationManagerDelegate {
+    
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == .AuthorizedWhenInUse {
             locationManager.requestLocation()
@@ -204,10 +213,41 @@ extension MapViewController: CLLocationManagerDelegate {
             let region = MKCoordinateRegionMake(location.coordinate, span)
             mapView.setRegion(region, animated: true)
             updateSearchResults()
+            
+            pointAnnotation = CustomPointAnnotation()
+            pointAnnotation.pinCustomImageName = "location"
         }
     }
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("error: \(error)")
     }
+    
+    // Drop pins of localResults search??
+    func showPins(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseIdentifier = "pin"
+        var dropPin = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseIdentifier)
+        if dropPin == nil {
+            dropPin = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            dropPin?.canShowCallout = false
+        } else {
+            dropPin?.annotation = annotation
+        }
+        let customPointAnnotation = annotation as! CustomPointAnnotation
+        dropPin?.image = UIImage(named: customPointAnnotation.pinCustomImageName)
+        
+        return dropPin
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
 
