@@ -34,9 +34,9 @@ class MapViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        //        self.refreshControl = UIRefreshControl()
-        //        self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
-        //        self.tableView.addSubview(self.refreshControl)
+                self.refreshControl = UIRefreshControl()
+                self.refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: UIControlEvents.ValueChanged)
+                self.tableView.addSubview(self.refreshControl)
         
         
     }
@@ -115,20 +115,27 @@ class MapViewController: UIViewController {
     }
     
     func selectRestaurantNotification() {
-        let alertController = UIAlertController(title: "No Restaurant Selected", message: "Select Restaurants To Proceed", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "No Restaurant Selected", message: "Select Two Or More Restaurants To Proceed", preferredStyle: .Alert)
         let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
         alertController.addAction(action)
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-//    var refreshControl =  UIRefreshControl()
-//    
-//    func refresh() {
-//        self.updateSearchResults()
-//        self.tableView.reloadData()
-//        self.refreshControl.endRefreshing()
-//        
-//    }
+    var refreshControl =  UIRefreshControl()
+    
+    func refresh() {
+        tableView.insertSubview(refreshControl, atIndex: 0)
+        let indexPaths = tableView.indexPathsForSelectedRows ?? []
+        for indexPath in indexPaths {
+            tableView.deselectRowAtIndexPath(indexPath, animated: false)
+            tableView(tableView, didDeselectRowAtIndexPath: indexPath)
+        }
+        // self.tableView.cellForRowAtIndexPath(indexPath)?.acessoryType = UITableViewCellAccessoryType.None
+        
+        self.refreshControl.endRefreshing()
+        updateSearchResults()
+    }
+    
 
 
 }
@@ -142,7 +149,6 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("restaurantCell", forIndexPath: indexPath)
         let restaurant = self.localSearchResults[indexPath.row] 
         cell.textLabel?.text = restaurant.name!
-        
         return cell
     }
     
@@ -152,12 +158,11 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
-        print(indexPath.row)
+        print(tableView.indexPathsForSelectedRows)
         print(selectedRestaurantsArray.count)
         let mapItem = localSearchResults[indexPath.row]
         selectedRestaurantsArray.append(mapItem)
         print(selectedRestaurantsArray)
-        
         
     }
     
@@ -174,10 +179,6 @@ extension MapViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         if let selectedRow = tableView.indexPathsForSelectedRows {
             if selectedRow.count == 8 {
-//                let alertController = UIAlertController(title: "Oops!", message: "Selected more than 8 places", preferredStyle: .Alert)
-//                alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: {action in}))
-//                self.presentViewController(alertController, animated: true, completion: nil)
-                
                 return nil
             }
         }
