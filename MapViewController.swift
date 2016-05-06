@@ -59,27 +59,21 @@ class MapViewController: UIViewController {
             selectedDistance = convertMilesIntoMeters(1)
             let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), selectedDistance / 2, selectedDistance / 2)
             mapView.region = region
-            
             localSearchResults.appendContentsOf(selectedRestaurantsArray)
-            
             updateSearchResults()
             
         } else if sender.selectedSegmentIndex == 1 {
             selectedDistance = convertMilesIntoMeters(2)
             let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), selectedDistance / 2, selectedDistance / 2)
             mapView.region = region
-            
             localSearchResults.appendContentsOf(selectedRestaurantsArray)
-            
             updateSearchResults()
             
         } else if sender.selectedSegmentIndex == 2 {
             selectedDistance = convertMilesIntoMeters(5)
             let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), selectedDistance / 2, selectedDistance / 2)
             mapView.region = region
-            
             localSearchResults.appendContentsOf(selectedRestaurantsArray)
-            
             updateSearchResults()
         }
     }
@@ -130,14 +124,9 @@ class MapViewController: UIViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
             tableView(tableView, didDeselectRowAtIndexPath: indexPath)
         }
-        // self.tableView.cellForRowAtIndexPath(indexPath)?.acessoryType = UITableViewCellAccessoryType.None
-        
         self.refreshControl.endRefreshing()
         updateSearchResults()
     }
-    
-
-
 }
 
 

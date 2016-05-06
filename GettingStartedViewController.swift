@@ -12,9 +12,9 @@ import CoreLocation
 
 class GettingStartedViewController: UIViewController {
     
-    @IBOutlet weak var iLunchRouletteLabel: UILabel!
-    
     @IBOutlet weak var getStartedButton: UIButton!
+    
+    @IBOutlet weak var iLunchLogoImageView: UIImageView!
     
     let colors = Color()
 
